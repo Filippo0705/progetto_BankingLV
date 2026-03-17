@@ -1,0 +1,6 @@
+mysql/*
+!mysql/.gitkeep
+
+app/node_modules
+app/build
+app/.git
