@@ -1,25 +1,33 @@
-CREATE TABLE `alunni` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(20) NOT NULL,
-  `cognome` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE accounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    owner_name VARCHAR(255) NOT NULL,
+    currency VARCHAR(10) NOT NULL DEFAULT 'EUR',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `certificazioni` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `alunno_id` INT(11) NOT NULL,
-  `titolo` VARCHAR(100) NOT NULL,
-  `votazione` INT(3) NOT NULL CHECK (`votazione` BETWEEN 0 AND 100),
-  `ente` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`alunno_id`) REFERENCES `alunni`(`id`) ON DELETE CASCADE
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    type ENUM('deposit', 'withdrawal') NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `alunni` (`nome`, `cognome`) VALUES
-('claudio', 'benve'),
-('ivan', 'bruno');
+INSERT INTO 
+  accounts (owner_name, currency)
+VALUES 
+  ('Mario Rossi', 'EUR'),
+  ('Luigi Bianchi', 'EUR');
 
-INSERT INTO `certificazioni` (`alunno_id`, `titolo`, `votazione`, `ente`) VALUES
-(1, 'Certificazione Python', 85, 'Coursera'),
-(1, 'Certificazione SQL', 90, 'Udemy'),
-(2, 'Certificazione Java', 78, 'Oracle');
+INSERT INTO 
+  transactions (account_id, type, amount, description, balance_after)
+VALUES 
+  (1, 'deposit', 1000.00, 'Stipendio', 1000.00);
+
+INSERT INTO 
+  transactions (account_id, type, amount, description, balance_after)
+VALUES 
+  (1, 'withdrawal', 200.00, 'Spesa supermercato', 800.00);
