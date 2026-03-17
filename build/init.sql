@@ -1,3 +1,4 @@
+
 CREATE TABLE accounts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     owner_name VARCHAR(255) NOT NULL,
@@ -23,11 +24,9 @@ VALUES
   ('Luigi Bianchi', 'EUR');
 
 INSERT INTO 
-  transactions (account_id, type, amount, description, balance_after)
+  transactions (account_id, type, amount, description)
 VALUES 
-  (1, 'deposit', 1000.00, 'Stipendio', 1000.00);
+  ( 1, 'deposit', 1000.00, 'stipendio'),
+  ( 2, 'deposit', 2000.00, 'stipendio'),
+  ( 1, 'deposit', 1200.00, 'scommesse');
 
-INSERT INTO 
-  transactions (account_id, type, amount, description, balance_after)
-VALUES 
-  (1, 'withdrawal', 200.00, 'Spesa supermercato', 800.00);

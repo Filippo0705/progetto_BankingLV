@@ -16,10 +16,15 @@ $app->get('/test', function (Request $request, Response $response, array $args) 
 
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
     $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
+    $response->getBody()->write("Ciao, $name");
     return $response;
 });
 
-$app->get('/alunni', "AlunniController:index");
+// ottenere l'elenco dei movimenti
+
+$app->get('/accounts/{id}/transactions', "bankingControll:lista");
+
+
+// ottenere l'elenco dettagliato di un movimento
 
 $app->run();
