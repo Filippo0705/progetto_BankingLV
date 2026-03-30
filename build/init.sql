@@ -2,7 +2,7 @@
 CREATE TABLE accounts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     owner_name VARCHAR(255) NOT NULL,
-    currency VARCHAR(10) NOT NULL DEFAULT 'EUR',
+    currency BIGINT NOT NULL DEFAULT 'EUR',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -10,7 +10,7 @@ CREATE TABLE transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,
     type ENUM('deposit', 'withdrawal') NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
+    amount BIGINT NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
