@@ -1,0 +1,19 @@
+Lista endpoint:
+
+1) POST /accounts/{id}/deposita
+2) POST /accounts/{id}/preleva
+3) GET /accounts/{id}/movimenti
+4) GET /accounts/{id}/movimenti/{n}
+5) GET /accounts/{id}/saldo
+
+Esempio chiamate
+
+1) curl -X POST http://localhost:8080/accounts/1/deposita -d {"amount": "10000", "description": "Tangente"} -H "Content-Type: application/json"
+
+2) curl -X POST http://localhost:8080/accounts/2/preleva -d {"amount": "-5000", "description": "Esselunga"}-H "Content-Type: application/json"
+
+3) curl http://localhost:8080/accounts/2/movimenti
+
+4) curl http://localhost:8080/accounts/1/movimenti/1
+
+5) curl http://localhost:8080/accounts/1/saldo
