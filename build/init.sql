@@ -26,7 +26,7 @@ VALUES
 INSERT INTO 
   transactions (account_id, type, amount, description)
 VALUES 
-  ( 1, 'deposit', 100000 'stipendio'),
+  ( 1, 'deposit', 100000 , 'stipendio'),
   ( 2, 'deposit', 200000, 'stipendio'),
   ( 1, 'deposit', 120000, 'scommesse');
 
