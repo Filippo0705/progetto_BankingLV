@@ -1,22 +1,31 @@
 Lista endpoint:
 
-1) POST /accounts/{id}/deposita
-2) POST /accounts/{id}/preleva
-3) GET /accounts/{id}/movimenti
-4) GET /accounts/{id}/movimenti/{n}
-5) GET /accounts/{id}/saldo
+1) POST /accounts/{id}/deposits
+2) POST /accounts/{id}/withdrawals
+3) GET /accounts/{id}/transactions
+4) GET /accounts/{id}/transactions/{n}
+5) GET /accounts/{id}/balance
 6) GET /accounts/{id}/balance/convert/fiat
+7) PUT /accounts/{id}/transactions/{n}
+8) DELETE /accounts/{id}/transactions/{n}
+9) GET /accounts/{id}/balance/convert/crypto
 
 Esempio chiamate
 
-1) curl -X POST http://localhost:8080/accounts/1/deposita -d {"amount": "10000", "description": "Tangente"} -H "Content-Type: application/json"
+1) curl -X POST http://localhost:8080/accounts/1/deposits -d {"amount": "10000", "description": "Tangente"} -H "Content-Type: application/json"
 
-2) curl -X POST http://localhost:8080/accounts/2/preleva -d {"amount": "-5000", "description": "Esselunga"}-H "Content-Type: application/json"
+2) curl -X POST http://localhost:8080/accounts/2/withdrawals -d {"amount": "-5000", "description": "Esselunga"}-H "Content-Type: application/json"
 
-3) curl http://localhost:8080/accounts/2/movimenti
+3) curl http://localhost:8080/accounts/2/ransactions
 
-4) curl http://localhost:8080/accounts/1/movimenti/1
+4) curl http://localhost:8080/accounts/1/ransactions/1
 
-5) curl http://localhost:8080/accounts/1/saldo
+5) curl http://localhost:8080/accounts/1/balance
 
-6) curl http://localhost:8080/accounts/{id}/balance/convert/fiat
+6) curl http://localhost:8080/accounts/1/balance/convert/fiat
+
+7) curl -X PUT http://localhost:8080/accounts/2/ransactions/2 -d {"amount": "500", "description": "Busta paga"} -H "Content-Type: application/json"
+
+8) curl -X DELETE http://localhost:8080/accounts/1/deposits/3
+
+9) curl http://localhost:8080/accounts/2/balance/convert/crypto
