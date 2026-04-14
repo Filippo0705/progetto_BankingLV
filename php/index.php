@@ -10,10 +10,10 @@ $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
 
 function getConnection() {
-    $host = "localhost";
+    $host = "my_mariadb";
     $user = "root";
-    $pass = "";
-    $db   = "banking";
+    $pass = "ciccio";
+    $db   = "scuola";
 
     $mysqli = new mysqli($host, $user, $pass, $db);
 
@@ -83,7 +83,7 @@ $app->get("/accounts/{id}/transactions", function(Request $request, Response $re
 // ==========================================
 $app->get("/accounts/{id}/transactions/{tid}", function(Request $request, Response $response, array $args) {
     $conn = getConnection();
-    $accountId = (int)$args["id"];
+    $accountId = (int)$args["id"]; 
     $transactionId = (int)$args["tid"];
 
     $transaction = getTransaction($conn, $accountId, $transactionId);
