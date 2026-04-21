@@ -1,31 +1,56 @@
-Lista endpoint:
+============================================================
+API ENDPOINTS - ESEMPI DI CHIAMATE
+============================================================
 
-1) POST /accounts/{id}/deposits
-2) POST /accounts/{id}/withdrawals
-3) GET /accounts/{id}/transactions
-4) GET /accounts/{id}/transactions/{n}
-5) GET /accounts/{id}/balance
-6) GET /accounts/{id}/balance/convert/fiat
-7) PUT /accounts/{id}/transactions/{n}
-8) DELETE /accounts/{id}/transactions/{n}
-9) GET /accounts/{id}/balance/convert/crypto
+NOTE: 
+- Sostituisci {id} con l'ID dell'account (es. 1).
+- Sostituisci {tid} con l'ID della transazione (es. 5).
+- Per le POST/PUT, i dati sono inviati come JSON (-d '{"chiave": "valore"}').
 
-Esempio chiamate
+------------------------------------------------------------
+1. ACCOUNTS (Saldo e Conversioni)
+------------------------------------------------------------
 
-1) curl -X POST http://localhost:8080/accounts/1/deposits -d {"amount": "10000", "description": "Tangente"} -H "Content-Type: application/json"
+[GET] Visualizza Saldo
+Browser: http://localhost:8080/accounts/1/balance
+CURL:    curl -X GET http://localhost:8080/accounts/1/balance
 
-2) curl -X POST http://localhost:8080/accounts/2/withdrawals -d {"amount": "-5000", "description": "Esselunga"}-H "Content-Type: application/json"
+[GET] Converti Saldo in FIAT (es. USD)
+Browser: http://localhost:8080/accounts/1/balance/convert/fiat?to=USD
+CURL:    curl -X GET "http://localhost:8080/accounts/1/balance/convert/fiat?to=USD"
 
-3) curl http://localhost:8080/accounts/2/ransactions
+[GET] Converti Saldo in CRYPTO (es. BTC)
+Browser: http://localhost:8080/accounts/1/balance/convert/crypto?to=BTC
+CURL:    curl -X GET "http://localhost:8080/accounts/1/balance/convert/crypto?to=BTC"
 
-4) curl http://localhost:8080/accounts/1/ransactions/1
+------------------------------------------------------------
+2. TRANSACTIONS (Movimenti)
+------------------------------------------------------------
 
-5) curl http://localhost:8080/accounts/1/balance
+[GET] Lista Movimenti
+Browser: http://localhost:8080/accounts/1/transactions
+CURL:    curl -X GET http://localhost:8080/accounts/1/transactions
 
-6) curl http://localhost:8080/accounts/1/balance/convert/fiat
+[GET] Dettaglio Singolo Movimento
+Browser: http://localhost:8080/accounts/1/transactions/5
+CURL:    curl -X GET http://localhost:8080/accounts/1/transactions/5
 
-7) curl -X PUT http://localhost:8080/accounts/2/ransactions/2 -d {"amount": "500", "description": "Busta paga"} -H "Content-Type: application/json"
+[POST] Deposito (Versamento)
+CURL:    curl -X POST http://localhost:8080/accounts/1/deposits \
+              -H "Content-Type: application/json" \
+              -d '{"amount": 100, "description": "Bonifico stipendio"}'
 
-8) curl -X DELETE http://localhost:8080/accounts/1/deposits/3
+[POST] Prelievo
+CURL:    curl -X POST http://localhost:8080/accounts/1/withdrawals \
+              -H "Content-Type: application/json" \
+              -d '{"amount": 50, "description": "Prelievo ATM"}'
 
-9) curl http://localhost:8080/accounts/2/balance/convert/crypto
+[PUT] Modifica Descrizione Transazione
+CURL:    curl -X PUT http://localhost:8080/accounts/1/transactions/5 \
+              -H "Content-Type: application/json" \
+              -d '{"description": "Descrizione aggiornata"}'
+
+[DELETE] Elimina Transazione (Solo se è l'ultima)
+CURL:    curl -X DELETE http://localhost:8080/accounts/1/transactions/5
+
+============================================================
